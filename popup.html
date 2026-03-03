@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Buddy</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/><circle cx="12" cy="15" r="2"/></svg>
+      <span>Kitchen Buddy</span>
+    </div>
+  </header>
+
+  <!-- Tab Bar -->
+  <nav class="tab-bar" role="tablist">
+    <button class="tab active" role="tab" aria-selected="true" data-tab="timer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3L2 6"/><path d="M22 6l-3-3"/><path d="M12 1v2"/></svg>
+      <span>Timer</span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="converter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l5 5-5 5"/><path d="M21 8H7"/><path d="M8 21l-5-5 5-5"/><path d="M3 16h14"/></svg>
+      <span>Converter</span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="checklist">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>Checklist</span>
+    </button>
+  </nav>
+
+  <!-- ===== TIMER TAB ===== -->
+  <section class="tab-content active" id="tab-timer">
+    <div class="timer-form">
+      <input type="text" id="timerName" class="input" placeholder="e.g. Boil Pasta" maxlength="30" autocomplete="off">
+      <div class="timer-inputs">
+        <div class="time-field">
+          <input type="number" id="timerH" class="input time-input" min="0" max="23" value="0" aria-label="Hours">
+          <label>h</label>
+        </div>
+        <span class="time-sep">:</span>
+        <div class="time-field">
+          <input type="number" id="timerM" class="input time-input" min="0" max="59" value="5" aria-label="Minutes">
+          <label>m</label>
+        </div>
+        <span class="time-sep">:</span>
+        <div class="time-field">
+          <input type="number" id="timerS" class="input time-input" min="0" max="59" value="0" aria-label="Seconds">
+          <label>s</label>
+        </div>
+        <button id="addTimerBtn" class="btn btn-primary" title="Add Timer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="timerList" class="timer-list">
+      <p class="empty-state">No timers yet — add one above!</p>
+    </div>
+  </section>
+
+  <!-- ===== CONVERTER TAB ===== -->
+  <section class="tab-content" id="tab-converter">
+    <div class="converter-card">
+      <div class="converter-row">
+        <input type="number" id="convFrom" class="input conv-input" value="1" step="any" min="0" autocomplete="off">
+        <select id="convFromUnit" class="select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="ml">Millilitres</option>
+            <option value="l">Litres</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="floz">Fluid Ounces</option>
+            <option value="qt">Quarts</option>
+            <option value="gal">Gallons</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g">Grams</option>
+            <option value="kg">Kilograms</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+          <optgroup label="Temperature">
+            <option value="f">°F</option>
+            <option value="c">°C</option>
+          </optgroup>
+        </select>
+      </div>
+      <button id="swapBtn" class="swap-btn" title="Swap units">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+      </button>
+      <div class="converter-row">
+        <input type="number" id="convTo" class="input conv-input" readonly tabindex="-1">
+        <select id="convToUnit" class="select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="ml" selected>Millilitres</option>
+            <option value="l">Litres</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="floz">Fluid Ounces</option>
+            <option value="qt">Quarts</option>
+            <option value="gal">Gallons</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g">Grams</option>
+            <option value="kg">Kilograms</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+          <optgroup label="Temperature">
+            <option value="f">°F</option>
+            <option value="c">°C</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="quick-refs">
+      <h3>Quick Reference</h3>
+      <div class="ref-grid">
+        <div class="ref-item">1 cup = 236.59 ml</div>
+        <div class="ref-item">1 oz = 28.35 g</div>
+        <div class="ref-item">1 tbsp = 3 tsp</div>
+        <div class="ref-item">1 lb = 453.59 g</div>
+        <div class="ref-item">1 qt = 4 cups</div>
+        <div class="ref-item">350°F = 177°C</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHECKLIST TAB ===== -->
+  <section class="tab-content" id="tab-checklist">
+    <div class="checklist-form">
+      <input type="text" id="itemInput" class="input" placeholder="Add an ingredient..." maxlength="60" autocomplete="off">
+      <button id="addItemBtn" class="btn btn-primary" title="Add Item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div id="checklistItems" class="checklist-items">
+      <p class="empty-state">Your grocery list is empty!</p>
+    </div>
+    <div class="checklist-actions" id="checklistActions" style="display:none;">
+      <button id="clearCheckedBtn" class="btn btn-ghost">Clear Checked</button>
+      <button id="clearAllBtn" class="btn btn-ghost btn-danger">Clear All</button>
+    </div>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>
